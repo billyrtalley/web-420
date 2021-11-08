@@ -1,0 +1,66 @@
+# Title: WEB420 Assignment 3.2 Describing the Composer API
+# Author: William Talley
+# Date: 11/1/2021
+# Description: Describing an API with an API description format (YAML)
+
+
+
+openapi: 3.0.0
+info:
+  title: Composer API 
+  version: "1.0"
+  description: Composer API in YAML format
+
+paths: 
+  # /composers defines the get and post for findAllComposers and createComposer operations: 
+  /composers:
+    get:
+      summary: Returns a list of composers
+      description: API for returning a list of composers from database(Mongo)
+      responses:
+        "200":
+          description: Composer Database
+        "500":
+          description: Server Exception
+        "501":
+          description: MongoDB Exception
+    post:
+      summary: Creates a new composer object
+      description: API for adding new composer 
+      requestBody:
+        description: Composer's Information
+        content:
+          applications/json:
+            schema:
+              type: object
+              properties:
+                firstName:
+                  type: string
+                lastName:
+                  type: string
+      responses:
+        "200":
+          description: Composer Added
+        "500":
+          description: Server Exception
+        "501":
+          description: MongoDB Exception
+  # /composers/{id} will define  get method for the findComposerById operation 
+  /composers/{id}:
+    get:
+      summary: Returns a composer document
+      description: API for returning a single composer object from MongoDB
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The composer id requested by the user
+      responses:
+        "200":
+          description: Composer returned by id
+        "500":
+          description: Server Exception
+        "501":
+          description: MongoDB Exception

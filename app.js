@@ -4,7 +4,7 @@
 // Date: 24 October 2021
 // Description: Setup of Github repository and adding
 // the package .json file and app .js file 
-// Directions for setup are from Belleuve University
+// Directions for setup are from Bellevue University
 //WEB420 RESTful APIs (author: Professor Richard Krasso)
 
 //declaration: require statements for express, http, swagger-ui-express, swagger-jsdoc, and mongoose.
@@ -17,7 +17,7 @@ var swaggerJsdoc =require("swagger-jsdoc");
 // assignment: variable app assigned to express
 var app = express();
 
-//set the port to process.env.PORT || 3000
+//set the port to process.env.PORT || 3002
 var port = process.env.PORT || 3002;
 
 //set the app to use express.json()
