@@ -13,12 +13,13 @@ var http = require("http");
 var mongoose = require("mongoose");
 var swaggerUi = require("swagger-ui-express");
 var swaggerJsdoc =require("swagger-jsdoc");
+var composerAPI = require("./routes/talley-composer-routes");
 
 // assignment: variable app assigned to express
 var app = express();
 
 //set the port to process.env.PORT || 3002
-var port = process.env.PORT || 3002;
+var port = process.env.PORT || 3000;
 
 //set the app to use express.json()
 app.use(express.json());
@@ -28,6 +29,21 @@ app.use(
     extended: true,
   })
 );
+
+//add MongoDB connection (for assignment 4.2 11/14/2021)
+const conn = "mongodb+srv://web420_user:buwebdev420@buwebdev-cluster-1.wmilj.mongodb.net/web420DB?retryWrites=true&w=majority";
+mongoose
+  .connect(conn, { 
+    promiseLibrary: require("bluebird"),
+    useUnifiedTopology: true,
+    useNewUrlParser: true,
+  })
+  .then(() => { 
+    console.log(`Connection to web420DB on MongoDB Atlas successful`);
+  }).catch(err => { 
+    console.log(`MongoDB Error: ${err.message}`);
+  })
+
 
 //define an object literal named options with the properties in the assignment instructions(exhibit C)
 const options = {
@@ -46,7 +62,8 @@ const openapiSpecification = swaggerJsdoc(options);
 
 //wire the openapiSpecification variable to the app variable
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(openapiSpecification));
-
+//added for assignment4.4 composer 
+app.use('/api', composerAPI);
 //set up a message
 //that let us know the application started on port 3002
 http.createServer(app).listen(port, function () {
