@@ -14,6 +14,7 @@ var mongoose = require("mongoose");
 var swaggerUi = require("swagger-ui-express");
 var swaggerJsdoc =require("swagger-jsdoc");
 var composerAPI = require("./routes/talley-composer-routes");
+var personAPI = require("./routes/talley-person-routes");
 
 // assignment: variable app assigned to express
 var app = express();
@@ -63,7 +64,9 @@ const openapiSpecification = swaggerJsdoc(options);
 //wire the openapiSpecification variable to the app variable
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(openapiSpecification));
 //added for assignment4.4 composer 
-app.use('/api', composerAPI);
+//added personAPI for assignment 5.2
+app.use('/api', composerAPI, personAPI);
+
 //set up a message
 //that let us know the application started on port 3002
 http.createServer(app).listen(port, function () {
