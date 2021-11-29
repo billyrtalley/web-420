@@ -15,11 +15,14 @@ var swaggerUi = require("swagger-ui-express");
 var swaggerJsdoc =require("swagger-jsdoc");
 var composerAPI = require("./routes/talley-composer-routes");
 var personAPI = require("./routes/talley-person-routes");
+//added for assignment 6.2 11/28/2021
+var userAPI = require('./routes/talley-session-routes')
+
 
 // assignment: variable app assigned to express
 var app = express();
 
-//set the port to process.env.PORT || 3002
+//set the port to process.env.PORT || 3000
 var port = process.env.PORT || 3000;
 
 //set the app to use express.json()
@@ -65,7 +68,7 @@ const openapiSpecification = swaggerJsdoc(options);
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(openapiSpecification));
 //added for assignment4.4 composer 
 //added personAPI for assignment 5.2
-app.use('/api', composerAPI, personAPI);
+app.use('/api', composerAPI, personAPI, userAPI);
 
 //set up a message
 //that let us know the application started on port 3002
