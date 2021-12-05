@@ -17,6 +17,8 @@ var composerAPI = require("./routes/talley-composer-routes");
 var personAPI = require("./routes/talley-person-routes");
 //added for assignment 6.2 11/28/2021
 var userAPI = require('./routes/talley-session-routes')
+//added for assignment 7.2 12/5/2021
+var customerAPI = require('./routes/talley-node-shopper-routes'); 
 
 
 // assignment: variable app assigned to express
@@ -68,10 +70,11 @@ const openapiSpecification = swaggerJsdoc(options);
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(openapiSpecification));
 //added for assignment4.4 composer 
 //added personAPI for assignment 5.2
-app.use('/api', composerAPI, personAPI, userAPI);
+app.use('/api', composerAPI, personAPI, userAPI, customerAPI);
+
 
 //set up a message
-//that let us know the application started on port 3002
+//that let us know the application started on port 3000
 http.createServer(app).listen(port, function () {
     console.log("The application started on port " + port + "!");
   });
