@@ -165,7 +165,7 @@ router.post('/composers', async(req, res) => {
  *     tags:
  *       - Composers
  *     name: updateComposerById
- *     description: API for updating a document.
+ *     description: API for updating an existing document in MongoDB
  *     summary: Updates a composer document by ID.
  *     parameters:
  *       - name: id
@@ -203,9 +203,9 @@ router.put('/composers/:id', async (req, res) => {
         Composer.findOne({'_id': req.params.id}, function(err, composer) {
             if (err) {
                 console.log(err);
-                res.status(401).send({
+                res.status(501).send({
 
-                    'message': `Invalid composerID: ${err}`
+                    'message': `MongoDB Exception: ${err}`
                 })
             } else {
                 console.log(composer);
@@ -242,7 +242,7 @@ router.put('/composers/:id', async (req, res) => {
  *       - Composers
  *     name: deleteComposer
  *     description: API for deleting a document.
- *     summary: Removes a composer document by ID.
+ *     summary: Removes a composer document from MongoDB
  *     parameters:
  *       - name: id
  *         in: path
@@ -267,9 +267,9 @@ router.put('/composers/:id', async (req, res) => {
             if(err) {
 
                 console.log(err);
-                res.status(401).send({
+                res.status(501).send({
 
-                    'message': `Invalid Composer Id: ${err}`
+                    'message': `MongoDB Exception ${err}`
 
                 })
             } else {
