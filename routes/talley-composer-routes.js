@@ -83,7 +83,7 @@ router.get('/composers/:id', async(req, res) => {
             if (err) {
                 console.log(err);
                 res.status(500).send({
-                    'message': `MongoDB Exception: ${err}`
+                    'message': `Server Exception: ${err}`
                 })
             } else {
                 console.log(composer);
@@ -92,7 +92,7 @@ router.get('/composers/:id', async(req, res) => {
         })
     } catch (e) {
         console.log(e);
-        res.status(500).send({
+        res.status(501).send({
             'message': `Server Exception: ${e.message}`
         })
     }
@@ -141,8 +141,8 @@ router.post('/composers', async(req, res) => {
         await Composer.create(newComposer, function(err, composer) {
             if (err) {
                 console.log(err);
-                res.status(501).send({
-                    'message': `MongoDB Exception: ${err}`
+                res.status(401).send({
+                    'message': `Composer Id is not valid: ${err}`
                 })
             } else {
                 console.log(composer);
@@ -198,14 +198,15 @@ router.post('/composers', async(req, res) => {
  *         description: MongoDB Exception
  */
 
+// 12/12/2021
 router.put('/composers/:id', async (req, res) => {
     try {
         Composer.findOne({'_id': req.params.id}, function(err, composer) {
             if (err) {
                 console.log(err);
-                res.status(501).send({
+                res.status(401).send({
 
-                    'message': `MongoDB Exception: ${err}`
+                    'message': `Composer Id is not valid: ${err}`
                 })
             } else {
                 console.log(composer);
@@ -258,6 +259,7 @@ router.put('/composers/:id', async (req, res) => {
  *       '501':
  *         description: MongoDB Exception
  */
+//12/12/2021
 
  router.delete('/composers/:id', async (req, res) => {
     try {
@@ -273,9 +275,8 @@ router.put('/composers/:id', async (req, res) => {
 
                 })
             } else {
+               
                 console.log(composer);
-                console.log("Composer with the id of" + req.params.id +
-                 " has been deleted.");
                 res.json(composer);
             }
         })
