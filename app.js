@@ -19,6 +19,8 @@ var personAPI = require("./routes/talley-person-routes");
 var userAPI = require('./routes/talley-session-routes')
 //added for assignment 7.2 12/5/2021
 var customerAPI = require('./routes/talley-node-shopper-routes'); 
+//added for the week9 capstone 12/19/2021
+var capstoneAPI = require('./routes/talley-capstone-routes');
 
 
 // assignment: variable app assigned to express
@@ -70,7 +72,7 @@ const openapiSpecification = swaggerJsdoc(options);
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(openapiSpecification));
 //added for assignment4.4 composer 
 //added personAPI for assignment 5.2
-app.use('/api', composerAPI, personAPI, userAPI, customerAPI);
+app.use('/api', composerAPI, personAPI, userAPI, customerAPI, capstoneAPI);
 
 
 //set up a message
